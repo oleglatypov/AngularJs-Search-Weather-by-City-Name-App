@@ -1,0 +1,23 @@
+<h1>Forecast page <strong>{{ city }}</strong></h1>
+<hr>
+<a href="#/">Back to Search</a>
+<h4 style="margin-bottom: 0">Days:</h4>
+<ul class="pagination">
+    <li ng-class="{ 'active': days === '2' }"><a href="#/forecast/2" class="link">2</a></li>
+    <li ng-class="{ 'active': days === '4' }"><a href="#/forecast/4" class="link">4</a></li>
+    <li ng-class="{ 'active': days === '6' }"><a href="#/forecast/6" class="link">6</a></li>
+</ul>
+
+
+<hr>
+<div ng-repeat="w in weatherResult.list">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Date {{ newDateFormat(w.dt) | date : format : timezone }}</h3>
+        </div>
+        <div class="panel-body">
+            Temperature: {{ w.temp.day }} C
+        </div>
+    </div>
+</div>
+
