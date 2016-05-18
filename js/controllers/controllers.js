@@ -15,16 +15,14 @@ weatherApp.controller('mainController',['$scope','$location', 'cityService', fun
     };
 }]);
 
-weatherApp.controller('foreCastController',['$scope','$resource','$routeParams', 'cityService', function ($scope,$resource,$routeParams, cityService){
+weatherApp.controller('foreCastController',['$scope','$routeParams', 'cityService','weatherService', function ($scope,$routeParams, cityService, weatherService){
     $scope.city = cityService.city;
     $scope.days = $routeParams.days || '2';
-    $scope.weatherAPI =
-        $resource('http://api.openweathermap.org/data/2.5/forecast/daily?q='+$scope.city+'&units=metric&cnt='+ $scope.days +'&appid=8c5c3c672d99f12db87411c44c61ff5e');
-    $scope.weatherResult = $scope.weatherAPI.get();
+
+    $scope.weatherResult = weatherService.GetWeather($scope.city, $scope.days);
+
     $scope.newDateFormat = function (time) {
-
         return new Date(time * 1000);
-
     };
     console.log($scope.weatherResult);
 
